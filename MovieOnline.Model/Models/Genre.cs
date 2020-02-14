@@ -19,7 +19,13 @@ namespace MovieOnline.Model.Models
         [Column(TypeName = "nvarchar")]
         public string Name { set; get; }
 
-        public virtual IEnumerable<GenreMovie> GenreMovies { set; get; }
+        public bool Status { set; get; }
+
+        public Genre()
+        {
+            Status = true;
+        }
+
 
     }
 }

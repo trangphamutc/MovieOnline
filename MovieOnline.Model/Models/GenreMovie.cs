@@ -18,10 +18,6 @@ namespace MovieOnline.Model.Models
         [Key]
         [Column(Order = 2)]
         public int GenreId { set; get; }
-        [ForeignKey("MovieId")]
-        public virtual Movie Movie { set; get; }
-        [ForeignKey("GenreId")]
-        public virtual Genre Genre { set; get; }
 
     }
 }

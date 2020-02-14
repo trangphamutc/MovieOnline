@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MovieOnline.Data.Repositories
 {
-    public interface IGenreRepository
+    public interface IGenreRepository:IRepository<Genre>
     {
-        IEnumerable<Movie> GetMoviesWithGenre(int genreID);
+        IEnumerable<Genre> GetGendersOfMovie(int movieId);
     }
     public class GenreRepository : RepositoryBase<Genre>, IGenreRepository
     {
@@ -19,15 +19,15 @@ namespace MovieOnline.Data.Repositories
         {
 
         }
-        public IEnumerable<Movie> GetMoviesWithGenre(int genreID)
+
+        public IEnumerable<Genre> GetGendersOfMovie(int movieId)
         {
-            List<GenreMovie> genreMovie = this.DbContext.GenreMovies.Where(x => x.GenreId == genreID).ToList();
-            List<Movie> listMovie = new List<Movie>();
-            foreach(var movie in genreMovie)
-            {
-                listMovie = this.DbContext.Movies.Where(t => t.Id == movie.MovieId).ToList();
-            }
-            return listMovie;
+            var query = from g in DbContext.Genres
+                        join gm in DbContext.GenreMovies
+                        on g.Id equals gm.GenreId
+                        where (gm.MovieId == movieId)
+                        select g;
+            return query;
         }
     }
 }

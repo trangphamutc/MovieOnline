@@ -8,12 +8,26 @@ using System.Threading.Tasks;
 
 namespace MovieOnline.Data.Repositories
 {
-    public class GenreMovieRepository: RepositoryBase<GenreMovie>
+    public interface IGenreMovieRepository : IRepository<GenreMovie>
     {
+        void Add(int movieId, int genreId);
+    }
+    public class GenreMovieRepository :RepositoryBase<GenreMovie>, IGenreMovieRepository
+    {
+
         public GenreMovieRepository(IDbFactory dbFactory)
             : base(dbFactory)
         {
 
+        }
+
+        public void Add(int movieId, int genreId)
+        {
+            GenreMovie gm = new GenreMovie();
+            gm.GenreId = genreId;
+            gm.MovieId = movieId;
+            
+            DbContext.GenreMovies.Add(gm);
         }
     }
 }

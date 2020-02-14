@@ -41,7 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenreMovieService.cs" />
+    <Compile Include="GenreService.cs" />
+    <Compile Include="MovieService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MovieOnline.Common\MovieOnline.Common.csproj">
+      <Project>{325af02b-3dd0-4e06-8ccb-09b33c725ce3}</Project>
+      <Name>MovieOnline.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieOnline.Data\MovieOnline.Data.csproj">
+      <Project>{aae8ce68-133c-4065-8dd2-5c5ea617b589}</Project>
+      <Name>MovieOnline.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MovieOnline.Model\MovieOnline.Model.csproj">
+      <Project>{143a8053-f2da-4e0c-9b25-35717b11a565}</Project>
+      <Name>MovieOnline.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
