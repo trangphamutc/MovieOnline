@@ -11,7 +11,7 @@ namespace MovieOnline.Service
 {
     public interface IMovieService
     {
-        void Add(Movie movie);
+        Movie Add(Movie movie);
         void Update(Movie movie);
         void Delete(int id);
         Movie Get(int id);
@@ -22,8 +22,8 @@ namespace MovieOnline.Service
     }
     public class MovieService : IMovieService
     {
-        IMovieRepository _movieRepository;
-        IUnitOfWork _unitOfWork;
+        private IMovieRepository _movieRepository;
+        private IUnitOfWork _unitOfWork;
 
         public MovieService(IMovieRepository movieRepository, IUnitOfWork unitOfWork)
         {
@@ -31,9 +31,9 @@ namespace MovieOnline.Service
             this._unitOfWork = unitOfWork;
         }
 
-        public void Add(Movie movie)
+        public Movie Add(Movie movie)
         {
-            _movieRepository.Add(movie);
+            return _movieRepository.Add(movie);
         }
 
         public void Delete(int id)

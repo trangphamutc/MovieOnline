@@ -69,6 +69,10 @@
     <Compile Include="Migrations\202002141759526_update.Designer.cs">
       <DependentUpon>202002141759526_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002150859178_sjnkjds.cs" />
+    <Compile Include="Migrations\202002150859178_sjnkjds.Designer.cs">
+      <DependentUpon>202002150859178_sjnkjds.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MovieOnlineDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002141759526_update.resx">
       <DependentUpon>202002141759526_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002150859178_sjnkjds.resx">
+      <DependentUpon>202002150859178_sjnkjds.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

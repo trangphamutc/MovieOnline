@@ -1,4 +1,5 @@
-﻿using MovieOnline.Service;
+﻿using MovieOnline.Model.Models;
+using MovieOnline.Service;
 using MovieOnline.Web.Insfrastructure.Core;
 using System;
 using System.Collections.Generic;
@@ -6,40 +7,82 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using MovieOnline.Web.Insfrastructure.Extension;
+using MovieOnline.Web.Models;
+using AutoMapper;
 
 namespace MovieOnline.Web.API
 {
+    [RoutePrefix("api/movie")]
     public class MovieController : ApiControllerBase
     {
-        public MovieController(IErrorService errorService) : base(errorService)
-        {
+        IMovieService _movieService;
+        public MovieController(IErrorService errorService, IMovieService movieService) : base(errorService)
 
+        {
+            this._movieService = movieService;
+        }
+
+        [Route("add")]
+        public HttpResponseMessage Create(HttpRequestMessage request, Movie movie)
+        {
+            return CreattHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else{
+                    Movie result = _movieService.Add(movie);
+                    _movieService.SaveChanges();
+                    response = request.CreateResponse(HttpStatusCode.Created, result);
+                }
+                return response;
+            });
+        }
+        [Route("update")]
+        public HttpResponseMessage Update(HttpRequestMessage request, Movie movie)
+        {
+            return CreattHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    _movieService.Update(movie);
+                    _movieService.SaveChanges();
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
+                return response;
+            });
+        }
+        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        {
+            return CreattHttpResponse(request, () =>{
+                HttpResponseMessage response = null;
+                var sources = _movieService.GetAll().ToList();
+                
+                response = request.CreateResponse(HttpStatusCode.OK, sources); 
+
+                return response;
+            });
         }
         // GET: api/Movie
-        public IEnumerable<string> Get()
+
+        public HttpResponseMessage GetAllPaging(HttpRequestMessage request, int pageIndex, int pageSize,int totalRow)
         {
-            return new string[] { "value1", "value2" };
+            return CreattHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var listMovie = _movieService.GetAllPaging(pageIndex, pageSize, out totalRow);
+                return response;
+            });
         }
 
-        // GET: api/Movie/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST: api/Movie
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Movie/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Movie/5
-        public void Delete(int id)
-        {
-        }
     }
 }

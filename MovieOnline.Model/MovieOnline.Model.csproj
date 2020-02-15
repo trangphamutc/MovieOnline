@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\GenreMovie.cs" />
     <Compile Include="Models\Movie.cs" />

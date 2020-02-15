@@ -15,7 +15,7 @@ namespace MovieOnline.Data.Repositories
     }
     public class MovieRepository : RepositoryBase<Movie>, IMovieRepository
     {
-        public MovieRepository(DbFactory dbFactory) 
+        public MovieRepository(IDbFactory dbFactory) 
             :base(dbFactory)
         {
 

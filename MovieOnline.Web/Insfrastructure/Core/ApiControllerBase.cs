@@ -14,7 +14,7 @@ namespace MovieOnline.Web.Insfrastructure.Core
 {
     public class ApiControllerBase : ApiController
     {
-        IErrorService _errorService;
+        private IErrorService _errorService;
 
         public ApiControllerBase(IErrorService errorService)
         {
